@@ -21,6 +21,15 @@ module.exports = {
         test: /\.mjs$/,
         include: /node_modules/,
         type: "javascript/auto",
+      },
+      {
+        test: /\.(graphql([es])?|gql)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'webpack-graphql-loader'
+          }
+        ]
       }
     ]
   },

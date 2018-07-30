@@ -1,10 +1,5 @@
-import { ApolloServer, gql } from 'apollo-server'
-
-const typeDefs = gql`
-  type Query {
-    hello: String!
-  }
-`
+import { ApolloServer, gql, IResolvers } from 'apollo-server'
+import typeDefs from './typeDefs.graphqls'
 
 const resolvers = {
   Query: {
@@ -13,6 +8,10 @@ const resolvers = {
 }
 
 ;(async () => {
-  const { url } = await new ApolloServer({ typeDefs, resolvers }).listen()
+  const { url } = await new ApolloServer({
+    typeDefs: gql(typeDefs),
+    resolvers
+  }).listen()
+
   console.log(`🚀 Server ready at ${url}`)
 })()
