@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: './src/client.ts',
+  entry: './src/client.tsx',
   output: {
     filename: 'client.js',
     publicPath: '/'
