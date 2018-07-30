@@ -1,5 +1,8 @@
-import { ApolloServer, gql, IResolvers } from 'apollo-server'
+import express from 'express'
+import { ApolloServer, gql } from 'apollo-server-express'
 import typeDefs from './typeDefs.graphqls'
+
+const app = express()
 
 const resolvers = {
   Query: {
@@ -7,11 +10,7 @@ const resolvers = {
   }
 }
 
-;(async () => {
-  const { url } = await new ApolloServer({
-    typeDefs: gql(typeDefs),
-    resolvers
-  }).listen()
+new ApolloServer({ typeDefs: gql(typeDefs), resolvers })
+  .applyMiddleware({ app, path: '/' })
 
-  console.log(`🚀 Server ready at ${url}`)
-})()
+app.listen(4000, () => console.log(`🚀 Server ready at http://localhost:4000`))

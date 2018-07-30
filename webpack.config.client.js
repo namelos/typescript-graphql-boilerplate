@@ -1,11 +1,11 @@
-const NodemonPlugin = require('nodemon-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  target: 'node',
-  entry: './src/server.ts',
+  entry: './src/client.ts',
   output: {
-    filename: 'server.js'
+    filename: 'client.js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.mjs', '.jsx', '.ts', '.tsx', '.json']
@@ -15,11 +15,6 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto",
       },
       {
         test: /\.(graphql([es])?|gql)$/,
@@ -33,6 +28,14 @@ module.exports = {
     ]
   },
   plugins: [
-    new NodemonPlugin()
-  ]
+    new HtmlWebpackPlugin()
+  ],
+  devServer: {
+    port: 3000,
+    historyApiFallback: true,
+    index: 'assets/index.html',
+    proxy: {
+      '/api': 'http://localhost:4000'
+    }
+  }
 }
