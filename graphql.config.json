@@ -1,6 +1,6 @@
 {
   "schema": {
-    "file": "src/typeDefs.graphqls"
+    "file": "src/schema.graphql"
   },
   "endpoints" : [
     {

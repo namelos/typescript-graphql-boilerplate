@@ -2,9 +2,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: './src/client.tsx',
+  entry: './src/browser/index.tsx',
   output: {
-    filename: 'client.js',
+    filename: 'main.js',
     publicPath: '/'
   },
   resolve: {
@@ -27,15 +27,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin()
-  ],
   devServer: {
     port: 3000,
     historyApiFallback: true,
-    index: 'assets/index.html',
     proxy: {
-      '/api': 'http://localhost:4000'
+      '*': 'http://localhost:4000'
     }
   }
 }
