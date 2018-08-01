@@ -32,4 +32,4 @@ render(<ApolloProvider client={client}>
   <BrowserRouter>
     <App />
   </BrowserRouter>
-</ApolloProvider>, document.body)
+</ApolloProvider>, document.querySelector('#root'))
