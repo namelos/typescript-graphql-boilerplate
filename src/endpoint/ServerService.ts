@@ -1,4 +1,4 @@
-import { Inject, Service } from 'typedi'
+import { Service } from 'typedi'
 import express, { Express } from 'express'
 import { useExpressServer } from 'routing-controllers'
 import { ApolloServer } from 'apollo-server-express'

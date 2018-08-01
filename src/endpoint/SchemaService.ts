@@ -7,22 +7,20 @@ import { gql, makeExecutableSchema } from 'apollo-server-express'
 export class SchemaService {
   schema: GraphQLSchema
 
+  resolvers = {
+    Query: {
+      hello: () => 'world'
+    }
+  }
+
   constructor() {
     this.createSchema()
   }
 
   createSchema() {
-    const resolvers = {
-      Query: {
-        hello: () => 'world'
-      }
-    }
-
     this.schema = makeExecutableSchema({
       typeDefs: gql(typeDefs),
-      resolvers
+      resolvers: this.resolvers
     })
-
-    return this.schema
   }
 }
