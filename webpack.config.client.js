@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
+        use: ['babel-loader', 'awesome-typescript-loader']
       },
       {
         test: /\.(graphql([es])?|gql)$/,
@@ -28,9 +29,13 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   devServer: {
     port: 3000,
     historyApiFallback: true,
+    hot: true,
     proxy: {
       '*': 'http://localhost:4000'
     }
