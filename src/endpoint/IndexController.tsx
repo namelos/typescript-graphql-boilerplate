@@ -5,7 +5,7 @@ import ApolloClient from 'apollo-client/ApolloClient'
 import { SchemaLink } from 'apollo-link-schema'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloProvider, getDataFromTree } from 'react-apollo'
-import { App } from '../common/App'
+import { App } from 'common/App'
 import { SchemaService } from './SchemaService'
 
 @Controller()
@@ -13,7 +13,7 @@ export class IndexController {
   constructor(private schemaService: SchemaService) {}
 
   @Get('/')
-  get() {
+  async get() {
     const client = new ApolloClient({
       ssrMode: true,
       link: new SchemaLink({ schema: this.schemaService.schema }),
@@ -24,19 +24,18 @@ export class IndexController {
       <App />
     </ApolloProvider>
 
-    return getDataFromTree(Root).then(() => {
-      const content = renderToString(Root)
+    await getDataFromTree(Root)
+    const content = renderToString(Root)
 
-      const html = <html lang="en">
+    const html = <html lang="en">
       <body>
-      <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
-      <script charSet="UTF-8"
-              dangerouslySetInnerHTML={{ __html: `window.__APOLLO_STATE__=${JSON.stringify(client.extract())};` }} />
-      <script src="main.js" />
+        <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
+        <script charSet="UTF-8"
+                dangerouslySetInnerHTML={{ __html: `window.__APOLLO_STATE__=${JSON.stringify(client.extract())};` }} />
+        <script src="main.js" />
       </body>
-      </html>
+    </html>
 
-      return `<!doctype html>\n${renderToStaticMarkup(html)}`
-    })
+    return `<!doctype html>\n${renderToStaticMarkup(html)}`
   }
 }

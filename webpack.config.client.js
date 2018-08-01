@@ -1,4 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   mode: 'development',
@@ -8,7 +8,8 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.mjs', '.jsx', '.ts', '.tsx', '.json']
+    extensions: ['.js', '.mjs', '.jsx', '.ts', '.tsx', '.json'],
+    modules: ['node_modules', path.resolve(__dirname, 'src')]
   },
   module: {
     rules: [
