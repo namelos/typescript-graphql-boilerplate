@@ -1,13 +1,15 @@
 import React from 'react'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+import { Route } from 'react-router'
+import { Hello } from 'common/components/Hello'
+import { About } from 'common/components/About'
+import { Link } from 'react-router-dom'
 
-const query = gql`
-  query Hello {
-    hello
-  }
-`
+export const App = () => <div>
+  <ul>
+    <li><Link to="/">Home</Link></li>
+    <li><Link to="/about">About</Link></li>
+  </ul>
 
-export const App = () => <Query query={query}>
-  {({ loading, data }) => loading ? <p>loading</p> : <p>hello { data.hello }</p>}
-</Query>
+  <Route exact path="/" component={Hello} />
+  <Route path="/about" component={About} />
+</div>

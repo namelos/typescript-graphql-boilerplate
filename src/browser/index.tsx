@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import ApolloClient from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
+import { BrowserRouter } from 'react-router-dom'
 import { App } from 'common/App'
 import { ApolloLink } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
@@ -28,5 +29,7 @@ const client = new ApolloClient({
 })
 
 render(<ApolloProvider client={client}>
-  <App />
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 </ApolloProvider>, document.body)
