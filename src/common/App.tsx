@@ -1,9 +1,6 @@
 import React from 'react'
-import { Hello } from '../queryTypes'
 import { Query } from 'react-apollo'
-import { gql } from 'apollo-boost'
-
-class HelloQuery extends Query<Hello, {}> {}
+import gql from 'graphql-tag'
 
 const query = gql`
   query Hello {
@@ -11,6 +8,6 @@ const query = gql`
   }
 `
 
-export const App = () => <HelloQuery query={query}>
+export const App = () => <Query query={query}>
   {({ loading, data }) => loading ? <p>loading</p> : <p>hello { data.hello }</p>}
-</HelloQuery>
+</Query>

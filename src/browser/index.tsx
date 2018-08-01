@@ -25,7 +25,7 @@ const client = new ApolloClient({
     })
   ]),
   cache: new InMemoryCache().restore(window['__APOLLO_STATE__'])
-});
+})
 
 render(<ApolloProvider client={client}>
   <App />
